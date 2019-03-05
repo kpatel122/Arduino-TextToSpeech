@@ -30,12 +30,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
  
 
-CSpeech::CSpeech(int rx,int tx):ss(rx,tx)
+CSpeech::CSpeech(int rx,int tx, int baud):ss(rx,tx)
 {
   options = "[x0][t6][v5][s6][m51][g2][h2][n1]";
-  ss.begin(9600);
+  ss.begin(baud);
+  
 }
-
+ 
 void CSpeech::speak(String message)
 {
   
@@ -65,6 +66,7 @@ void CSpeech::waitForSpeech(unsigned long timeout = 60000) {
   while ( ! done && (millis() - start) < timeout ) {
     while ( ss.available() ) {
       if ( ss.read() == 0x4F ) {
+        Serial.println("0x4F"); //tmp
         done = true;
         break;
       }

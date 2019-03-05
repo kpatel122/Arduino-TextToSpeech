@@ -37,9 +37,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 class CSpeech
 {
   public:
-    CSpeech(int rx,int tx);
+    CSpeech(int rx,int tx, int baud);
     void speak(String message);
-    void waitForSpeech(unsigned long timeout);
+    void waitForSpeech(unsigned long timeout = 60000);
   
   private:
     void sendMessagetoSpeechModule();
